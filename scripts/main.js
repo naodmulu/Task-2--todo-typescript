@@ -38,10 +38,10 @@ function editTask(index) {
     var editInput = document.createElement("input");
     var editSave = document.createElement("button");
     editInput.id = "editInput" + index;
+    editInput.value = tasks[index];
     editSave.innerText = "Save";
-    editSave.onclick = function () {
-        edit(index);
-    };
+    editSave.onclick = function () { return edit(index); };
+    container.innerHTML = '';
     container.appendChild(editInput);
     container.appendChild(editSave);
 }
@@ -49,14 +49,20 @@ function renderTask() {
     var tasksListView = document.createElement("div");
     var _loop_1 = function (i) {
         var container = document.createElement('div');
+        var information = document.createElement('p');
         var editButton = document.createElement('button');
         var deleteButton = document.createElement('button');
-        container.innerText = tasks[i];
         container.id = "taskContainer" + i;
+        container.className = "taskContainer";
+        information.textContent = tasks[i];
+        information.className = "information";
         deleteButton.innerText = 'Delete';
-        editButton.innerText = 'Edit';
         deleteButton.onclick = function () { return deleteTask(i); };
+        deleteButton.className = "deleteButton";
+        editButton.innerText = 'Edit';
         editButton.onclick = function () { return editTask(i); };
+        editButton.className = "editButton";
+        container.appendChild(information);
         container.appendChild(deleteButton);
         container.appendChild(editButton);
         tasksListView.appendChild(container);
