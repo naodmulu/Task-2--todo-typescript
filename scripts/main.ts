@@ -45,11 +45,11 @@ function editTask(index:number):void{
     let editSave = document.createElement("button");
 
     editInput.id = "editInput" + index;
+    editInput.value = tasks[index];
     editSave.innerText = "Save";
-    editSave.onclick = function() {
-        edit(index);
-    };
+    editSave.onclick = () => edit(index)
 
+    container.innerHTML = '';
     container.appendChild(editInput);
     container.appendChild(editSave);
 }
@@ -58,17 +58,25 @@ function renderTask():HTMLDivElement {
     let tasksListView = document.createElement("div");
     for (let i = 0; i < tasks.length; i++) {
         let container = document.createElement('div');
+        let information = document.createElement('p');
         let editButton = document.createElement('button');
         let deleteButton = document.createElement('button');
 
-        container.innerText = tasks[i];
         container.id = "taskContainer" + i;
-        deleteButton.innerText = 'Delete';
-        editButton.innerText = 'Edit';
+        container.className = "taskContainer";
 
+        information.textContent = tasks[i];
+        information.className = "information"
+
+        deleteButton.innerText = 'Delete';
         deleteButton.onclick = () => deleteTask(i)
+        deleteButton.className = "deleteButton";
+
+        editButton.innerText = 'Edit';
         editButton.onclick = () => editTask(i)
+        editButton.className = "editButton";
         
+        container.appendChild(information);
         container.appendChild(deleteButton);
         container.appendChild(editButton);
         tasksListView.appendChild(container);
